@@ -1,15 +1,17 @@
 package com.atjixue.gulimall.ware.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.atjixue.common.exception.BizCodeEnume;
+import com.atjixue.common.exception.NoStockException;
+import com.atjixue.gulimall.ware.vo.LockStockResult;
+import com.atjixue.gulimall.ware.vo.SkuHasStockVo;
+import com.atjixue.gulimall.ware.vo.WareSkuLockVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.atjixue.gulimall.ware.entity.WareSkuEntity;
 import com.atjixue.gulimall.ware.service.WareSkuService;
@@ -30,6 +32,26 @@ import com.atjixue.common.utils.R;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    @PostMapping("/lock/order")
+    public R orderLockStock(@RequestBody WareSkuLockVo vo){
+        try {
+            Boolean stock = wareSkuService.orderLockStock(vo);
+            return R.ok();
+        }catch (NoStockException e){
+            return R.error(BizCodeEnume.NO_SROCK_EXCEPTION.getCode(),BizCodeEnume.NO_SROCK_EXCEPTION.getMsg());
+        }
+
+    }
+
+    // 查询sku是否有库存
+    @PostMapping("/hasstock")
+    public R getSkusHasStock(@RequestBody List<Long> skuids){
+        //sku_id,stock
+        List<SkuHasStockVo> vos = wareSkuService.getSkusHasStock(skuids);
+
+        return R.ok().setData(vos);
+    }
 
     /**
      * 列表

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: gulimall-product
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        namespace: 35331501-412f-4c17-8b78-617054cd57f3
+        server-addr: 0.0.0.0:8848
+        file-extension: yml
+      discovery:
+        server-addr: 0.0.0.0:8848

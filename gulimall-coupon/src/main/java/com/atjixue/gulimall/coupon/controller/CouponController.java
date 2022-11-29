@@ -5,6 +5,8 @@ import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +29,25 @@ import com.atjixue.common.utils.R;
  */
 @RestController
 @RequestMapping("coupon/coupon")
+@RefreshScope
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    @Value("${coupon.user.name}")
+    private String name;
+    @Value("${coupon.user.age}")
+    private String age;
+    @RequestMapping("/test")
+    public R test(){
+        return R.ok().put("name",name).put("age",age);
+    }
+    @RequestMapping("/member/list")
+    public R membercoupons(){
+        CouponEntity couponEntity =new CouponEntity();
+        couponEntity.setCouponName("满100减10");
+        return R.ok().put("coupon",Arrays.asList(couponEntity));
+    }
 
     /**
      * 列表

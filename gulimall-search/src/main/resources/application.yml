@@ -1,0 +1,5 @@
+server:
+  port: 12000
+logging:
+  level:
+    com.atjixue.gulimall.search: debug

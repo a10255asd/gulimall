@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 0.0.0.0:8848
+      config:
+        namespace: 54087d71-b7a9-4dc3-b070-45ffb403b99c
+        file-extension: yml
+        server-addr: 0.0.0.0:8848
+server:
+  port: 88

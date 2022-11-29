@@ -4,11 +4,39 @@ spring:
     password: root
     url: jdbc:mysql://0.0.0.0:3306/gulimall_pms
     driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    alicloud:
+      access-key: LTAI5tNTVvfmzpKozi3oTTif
+      secret-key: fwk0hRNGtvnraLWkvxghBiDu6BLdri
+      oss:
+        endpoint: oss-cn-qingdao.aliyuncs.com
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  thymeleaf:
+    cache: false
+
+  resources:
+    static-locations: classpath:templates/,classpath:static/
+  redis:
+    host: 0.0.0.0
+    port: 6379
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 server:
   port: 10000
+logging:
+  level:
+    com.atjixue.gulimall: error
+    com.alibaba.nacos.client.naming: error
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 120000
+  #请求连接的超时时间
+  ConnectTimeout: 30000
