@@ -6,8 +6,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   cloud:
     alicloud:
-      access-key: LTAI5tNTVvfmzpKozi3oTTif
-      secret-key: fwk0hRNGtvnraLWkvxghBiDu6BLdri
+      access-key: *********
+      secret-key: *********
       oss:
         endpoint: oss-cn-qingdao.aliyuncs.com
   jackson:
